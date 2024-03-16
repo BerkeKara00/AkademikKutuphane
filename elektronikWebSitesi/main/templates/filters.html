@@ -1,0 +1,91 @@
+{% load static %}
+
+<script type="text/javascript" src="{% static 'product-filter.js' %}"></script>
+<h3 class="mb-4 border-bottom pb-1">Filtreler</h3>
+<!-- <div class="dropdown">
+    <button class="dropbtn">Dropdown</button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div> -->
+  
+
+
+
+<div class="card mb-4">
+    <h6 class="card-header">Diller</h6>
+    <div class="list-group list-group-flush">
+        {% for lang in langs %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" id="lang-{{lang.id}}" data-filter="primarylanguage" value="{{lang.id}}" type="checkbox" {% if lang.id in selectedLanguages %}checked{% endif %} />&nbsp;
+                {{lang.title}}
+            </li>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card mb-4">
+    <h6 class="card-header">Yayınlanma Tarihi</h6>
+    <div class="list-group list-group-flush">
+        {% for siralama in siralamas %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" id="siralama-{{siralama.id}}" data-filter="siralama" value="{{siralama.id}}" type="checkbox"  />&nbsp;
+                {{siralama.title}}
+            </li>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="card mb-4">
+    <h6 class="card-header">Bölümler</h6>
+    <div id="" style="overflow:scroll; height:175px;" class="list-group list-group-flush">
+        {% for section in sections %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" id="section-{{section.id}}" data-filter="section" value="{{section.id}}" type="checkbox" />&nbsp;
+                {{ section.title|slice:":24" }}{% if section.title|length > 24 %}...{% endif %}
+            </li>
+        {% endfor %}
+    </div>
+</div>
+<div class="card mb-4">
+    <h6 class="card-header">Yazarlar</h6>
+    <div id="" style="overflow:scroll; height:250px;" class="list-group list-group-flush">
+        {% for authors in authorss %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" id="authors-{{authors.id}}" data-filter="authors" value="{{authors.id}}" type="checkbox" />&nbsp;
+                {{ authors.title|slice:":24" }}{% if authors.title|length > 24 %}...{% endif %}
+            </li>
+        {% endfor %}
+    </div>
+</div>
+<div class="card mb-4">
+    <h6 class="card-header">Anahtar Kelimeler</h6>
+    <div id="" style="overflow:scroll; height:400px;" class="list-group list-group-flush">
+        {% for anahtar_kelime in anahtar_kelimes %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" id="anahtar_kelime-{{anahtar_kelime.id}}" data-filter="anahtar_kelime" value="{{anahtar_kelime.id}}" type="checkbox" />&nbsp;
+                {{ anahtar_kelime.title|slice:":24" }}{% if anahtar_kelime.title|length > 24 %}...{% endif %}
+            </li>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<script>
+      
+     document.addEventListener("DOMContentLoaded", function() {
+      
+         var selectedLanguages = [1,2]; 
+         selectedLanguages.forEach(function(langId) {
+             var checkbox = document.getElementById("lang-" + langId);
+             if (checkbox) {
+                 checkbox.checked = true;
+             }
+         });
+     });
+    
+</script>

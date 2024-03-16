@@ -1,0 +1,15 @@
+{% for product in data %}
+{% load static %}
+				<div class="col-md-4 mb-4 product-box">
+					<div class="card shadow">
+					  <a  href="/product/{{product.id}}"><img src="{% static '/media/images/makale.png' %}" class="card-img-top" alt="{{product.title}}"     ></a>
+					  <div class="card-body text-center">
+					    <h6 class="justify-text">
+							<a href="/product/{{product.id}}">
+								{{ product.title|slice:":86" }}{% if product.title|length > 86 %}...{% endif %}
+							</a>
+						</h6>
+                    </div>
+					</div>
+				</div>
+				{% endfor %}

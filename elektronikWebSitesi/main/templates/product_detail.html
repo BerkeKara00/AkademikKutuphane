@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+<main class="container my-4">
+	<h3 class="my-4 border-bottom pb-1">{{data.title}}</h3>
+	<div class="row">
+		<div class="col-md-4">
+			<img   src="{% static '/media/images/makale.png' %}" class="card-img-top" alt="{{data.title}}">
+		</div>
+		<div class="col-md-8">
+			<p>{{data.detail}}</p>
+			<hr/>
+			<style>
+				.justify-text {
+					text-align: justify;
+				}
+			</style>
+			<table class="table table-bordered ">
+				<tr>
+					
+					<th class="justify-text">
+						<span class="product-price-{{data.id}}">{{data.abstract}}<br></span>
+					</th>
+				</tr>
+			</table>
+			<hr/>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h3 class="my-3"></h3>
+			<table class="table table-bordered">
+				<tr>
+					<th>Yazar :</th>
+					<td>{% for authors in data.authors.all %}
+						<a>{{ authors }}</a>
+								{% if not forloop.last %}, {% endif %}
+							{% endfor %}</td>
+				</tr>
+				<tr>
+					<th>Bölüm :</th>
+					<td>{{data.section}}</td>
+				</tr>
+				<tr>
+					<th>Birincil Dil :</th>
+					<td>{{data.primarylanguage}}</td>
+				</tr>
+				<tr>
+					<th>Yayın Tarihi :</th>
+					<td>{{ data.publication_date|date:"d E Y" }}</td>
+				</tr>
+				<tr>
+					<th>Anahtar Kelimeler :</th>
+					<td>
+						{% for anahtar_kelime in data.anahtar_kelime.all %}
+    				<a>{{ anahtar_kelime }}</a>
+							{% if not forloop.last %}, {% endif %}
+						{% endfor %}
+
+
+						<!-- {% for keyword in data.keywords %}
+							<a href="{{ data.url }}">{{ keyword }}</a>
+							{% if not forloop.last %}, {% endif %}
+						{% endfor %} -->
+					</td>
+				</tr>
+				<tr>
+					<th>Kaynak URL :</th>
+					<td><a href="{{data.url}}">{{data.url}}</a></td>
+				</tr>
+					{% if data.doi_number %}
+					<tr>
+						<th>Doi numarası :</th>
+						<td>{{ data.doi_number }}</td>
+					</tr>
+				{% endif %}
+				
+			</table>
+		</div>
+		
+		
+	</div>
+</main>
+<script src="https://cdn.jsdelivr.net/gh/igorlino/elevatezoom-plus@1.2.3/src/jquery.ez-plus.js"></script>
+<script>
+    $('#zoom_01').ezPlus();
+</script>
+{% endblock %}
